@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shahrouz Heidemann — AI Engineer & Researcher</title>
+<meta name="description" content="AI Engineer, Robotics Specialist & Software Developer at TU Berlin. Building intelligent cognitive industrial systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080b12;
+  --bg2: #0d1117;
+  --bg3: #111827;
+  --surface: #161d2e;
+  --surface2: #1e2a3e;
+  --border: rgba(99,179,237,0.12);
+  --border2: rgba(99,179,237,0.22);
+  --accent: #3b9eff;
+  --accent2: #63b3ed;
+  --accent-glow: rgba(59,158,255,0.18);
+  --text: #e8edf5;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── Canvas ── */
+#canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+  opacity: 0.45;
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 64px;
+  background: rgba(8,11,18,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent2);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 13px;
+  color: var(--text2);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  font-size: 13px; font-weight: 500;
+  color: var(--accent);
+  border: 1px solid var(--border2);
+  padding: 7px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.nav-cta:hover { background: var(--accent-glow); border-color: var(--accent); }
+
+/* ── Sections ── */
+section { position: relative; z-index: 1; }
+
+/* ── Hero ── */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 8rem 2rem 4rem;
+  text-align: center;
+}
+.hero-inner { max-width: 860px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent2);
+  border: 1px solid var(--border2);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 2.2rem;
+  background: rgba(59,158,255,0.07);
+  letter-spacing: 0.06em;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+h1 {
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+}
+h1 span {
+  color: var(--accent);
+  font-weight: 500;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text2);
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.01em;
+}
+.hero-desc {
+  font-size: 1rem;
+  color: var(--text3);
+  max-width: 600px;
+  margin: 0 auto 2.8rem;
+  line-height: 1.8;
+}
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  font-size: 14px; font-weight: 500;
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-cv {
+  font-size: 14px; font-weight: 500;
+  color: var(--accent2);
+  border: 1px solid var(--border2);
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-cv:hover { background: var(--accent-glow); color: var(--text); }
+  font-size: 14px; font-weight: 500;
+  color: var(--text2);
+  border: 1px solid var(--border2);
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-secondary:hover { background: var(--surface); color: var(--text); }
+
+.hero-stats {
+  display: flex; gap: 3rem; justify-content: center;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.stat-val {
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--accent2);
+  font-family: var(--mono);
+  display: block;
+}
+.stat-label {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Section headers ── */
+.section-wrap { max-width: 1000px; margin: 0 auto; padding: 6rem 2rem; }
+.sec-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.sec-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+.sec-desc {
+  font-size: 1rem;
+  color: var(--text2);
+  max-width: 560px;
+  line-height: 1.8;
+}
+
+/* ── About ── */
+#about { border-top: 1px solid var(--border); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+.about-photo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.avatar {
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  border: 2px solid var(--border2);
+  background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem;
+  box-shadow: 0 0 40px rgba(59,158,255,0.15);
+  font-weight: 300;
+  color: var(--accent2);
+  font-family: var(--mono);
+  letter-spacing: -0.03em;
+}
+.contact-links { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.contact-link {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--text2);
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.2s, color 0.2s;
+}
+.contact-link:hover { border-color: var(--border2); color: var(--text); }
+.contact-link svg { width: 16px; height: 16px; opacity: 0.7; flex-shrink: 0; }
+.about-text p {
+  font-size: 0.95rem;
+  color: var(--text2);
+  line-height: 1.9;
+  margin-bottom: 1.2rem;
+}
+.about-text p strong { color: var(--text); font-weight: 500; }
+
+/* ── Skills ── */
+#skills { border-top: 1px solid var(--border); }
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 3rem;
+}
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.skill-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.skill-card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.skill-card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent2);
+  background: rgba(59,158,255,0.08);
+  border: 1px solid rgba(59,158,255,0.2);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+/* ── Experience ── */
+#experience { border-top: 1px solid var(--border); }
+.timeline { margin-top: 3rem; display: flex; flex-direction: column; gap: 0; }
+.timeline-item {
+  display: grid;
+  grid-template-columns: 140px 1px 1fr;
+  gap: 0 2rem;
+  padding-bottom: 2.5rem;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  padding-top: 4px;
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+.timeline-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.timeline-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 4px;
+  box-shadow: 0 0 0 3px rgba(59,158,255,0.2);
+}
+.timeline-connector {
+  width: 1px;
+  flex: 1;
+  background: var(--border);
+  margin-top: 6px;
+}
+.timeline-item:last-child .timeline-connector { display: none; }
+.timeline-content { padding-bottom: 0.5rem; }
+.timeline-org {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent2);
+  margin-bottom: 2px;
+  font-family: var(--mono);
+}
+.timeline-role {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+.timeline-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.75;
+}
+.timeline-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.8rem; }
+
+/* ── Research ── */
+#research { border-top: 1px solid var(--border); }
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 3rem;
+}
+.research-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: border-color 0.2s;
+}
+.research-card:hover { border-color: var(--border2); }
+.research-year {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.06em;
+}
+.research-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+.research-venue {
+  font-size: 13px;
+  color: var(--accent2);
+  margin-bottom: 0.8rem;
+}
+.research-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+/* ── Vision ── */
+#vision { border-top: 1px solid var(--border); }
+.vision-box {
+  margin-top: 3rem;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.vision-box::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(59,158,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.vision-headline {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.vision-headline span { color: var(--accent); font-weight: 500; }
+.vision-text {
+  font-size: 0.95rem;
+  color: var(--text2);
+  line-height: 1.85;
+  max-width: 680px;
+  margin-bottom: 2rem;
+}
+.vision-pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+.pillar {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+.pillar-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+.pillar-label { font-size: 12px; color: var(--text2); font-weight: 500; }
+
+/* ── Education ── */
+#education { border-top: 1px solid var(--border); }
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 3rem;
+}
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+.edu-card:hover { border-color: var(--border2); }
+.edu-degree {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+.edu-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+.edu-institution {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 0.5rem;
+}
+.edu-meta {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+}
+
+/* ── Contact ── */
+#contact { border-top: 1px solid var(--border); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+.contact-info p {
+  font-size: 0.95rem;
+  color: var(--text2);
+  line-height: 1.85;
+  margin-bottom: 2rem;
+}
+.contact-items { display: flex; flex-direction: column; gap: 12px; }
+.contact-item {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; color: var(--text2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-item:hover { color: var(--accent2); }
+.contact-item-icon {
+  width: 36px; height: 36px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.contact-form-info {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+}
+.contact-form-info h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+.contact-form-info p {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.open-to { display: flex; flex-direction: column; gap: 8px; }
+.open-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text2);
+}
+.open-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  position: relative; z-index: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { display: none; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .timeline-item { grid-template-columns: 90px 1px 1fr; gap: 0 1rem; }
+  .hero-stats { gap: 1.5rem; }
+  .section-wrap { padding: 4rem 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">SH.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:heidemann.shahrouz@gmail.com">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Available for collaborations &amp; PhD opportunities
+    </div>
+    <h1>Shahrouz<br><span>Heidemann</span></h1>
+    <p class="hero-sub">AI Engineer · Robotics · Software Developer @ TU Berlin</p>
+    <p class="hero-desc">Building intelligent cognitive industrial systems at the intersection of Artificial Intelligence, Robotics, and Industry 4.0.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#contact">Contact me</a>
+      <a class="btn-cv" href="CV_Shahrouz_Heidemann.pdf" download title="Download CV as PDF">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
+      </a>
+      <a class="btn-secondary" href="#experience">View experience</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-val">5+</span>
+        <span class="stat-label">Years industry</span>
+      </div>
+      <div>
+        <span class="stat-val">3</span>
+        <span class="stat-label">Intl. conferences</span>
+      </div>
+      <div>
+        <span class="stat-val">AI</span>
+        <span class="stat-label">Core focus</span>
+      </div>
+      <div>
+        <span class="stat-val">MSc</span>
+        <span class="stat-label">Mechatronics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <p class="sec-label">// about</p>
+    <h2 class="sec-title">Interdisciplinary engineer<br>at the edge of AI &amp; industry</h2>
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="avatar" id="avatar-wrap">
+          <img id="avatar-img" src="photo.jpg" alt="Shahrouz Heidemann" onerror="this.style.display='none';document.getElementById('avatar-initials').style.display='flex'" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block">
+          <span id="avatar-initials" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:3rem;font-weight:300;color:var(--accent2);font-family:var(--mono)">SH</span>
+        </div>
+        <p style="font-size:11px;color:var(--text3);font-family:var(--mono);text-align:center">Foto: photo.jpg im selben Ordner</p>
+        <div class="contact-links">
+          <a class="contact-link" href="https://www.linkedin.com/in/shahrouz-heidemann" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            linkedin.com/in/shahrouz-heidemann
+          </a>
+          <a class="contact-link" href="https://git.tu-berlin.de/heidemann.shahrouz" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 006 0v-1a10 10 0 10-3.92 7.94"/></svg>
+            git.tu-berlin.de/heidemann.shahrouz
+          </a>
+          <a class="contact-link" href="mailto:heidemann.shahrouz@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            heidemann.shahrouz@gmail.com
+          </a>
+          <a class="contact-link" href="tel:+4917632607745">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            +49 176 32607745
+          </a>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>I am an interdisciplinary engineer with a background in <strong>Computer Engineering and Mechatronics Engineering</strong>, specializing in Artificial Intelligence, Machine Learning, Robotics, Embedded Systems, IoT, and Industry 4.0.</p>
+        <p>Currently working as a <strong>Software Developer at Technische Universität Berlin</strong>, where I develop software solutions and contribute to digital transformation and information management (TV-L E12).</p>
+        <p>My long-term vision is to bridge <strong>AI, Robotics, and Industrial Automation</strong> by developing intelligent cognitive systems that support engineers and manufacturing environments — ultimately building a Deep-Tech startup in this space.</p>
+        <p>I am passionate about applying AI research to real-world industrial challenges, and actively seeking collaborations with research groups, European accelerators, and Horizon Europe projects.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <p class="sec-label">// core expertise</p>
+    <h2 class="sec-title">Technical skills</h2>
+    <p class="sec-desc">A broad stack built over years of industry and research — from embedded systems to cloud AI.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon">🧠</div>
+        <div class="skill-card-title">Artificial Intelligence</div>
+        <div class="skill-tags">
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Deep Learning</span>
+          <span class="tag">Neural Networks</span>
+          <span class="tag">ANFIS</span>
+          <span class="tag">Fuzzy Logic</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🤖</div>
+        <div class="skill-card-title">Robotics &amp; Automation</div>
+        <div class="skill-tags">
+          <span class="tag">ROS / ROS2</span>
+          <span class="tag">ABB Robotics</span>
+          <span class="tag">Cognitive Robotics</span>
+          <span class="tag">Computer Vision</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">⚙️</div>
+        <div class="skill-card-title">Industrial Systems</div>
+        <div class="skill-tags">
+          <span class="tag">PLC (TIA Portal)</span>
+          <span class="tag">Industry 4.0</span>
+          <span class="tag">HMI (WinCC)</span>
+          <span class="tag">Digital Twin</span>
+          <span class="tag">IoT / IIoT</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">💻</div>
+        <div class="skill-card-title">Software Development</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">C++</span>
+          <span class="tag">PHP</span>
+          <span class="tag">Node-RED</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Git</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">☁️</div>
+        <div class="skill-card-title">Infrastructure</div>
+        <div class="skill-tags">
+          <span class="tag">Linux</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Cloud</span>
+          <span class="tag">Edge AI</span>
+          <span class="tag">MS SQL Server</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📐</div>
+        <div class="skill-card-title">Engineering Tools</div>
+        <div class="skill-tags">
+          <span class="tag">MATLAB</span>
+          <span class="tag">Simulink</span>
+          <span class="tag">Factory I/O</span>
+          <span class="tag">Embedded Systems</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <p class="sec-label">// experience</p>
+    <h2 class="sec-title">Professional timeline</h2>
+    <p class="sec-desc">Industry experience spanning software development, industrial automation, and AI research.</p>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">2024 — now</div>
+        <div class="timeline-line">
+          <div class="timeline-dot"></div>
+          <div class="timeline-connector"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-org">Technische Universität Berlin</div>
+          <div class="timeline-role">Software Developer (Application Development)</div>
+          <div class="timeline-desc">Software development and digital transformation at TU Berlin (TV-L E12). Development of enterprise information systems, business process digitalization, and digital information management for research and teaching operations.</div>
+          <div class="timeline-tech">
+            <span class="tag">PHP</span><span class="tag">HTML</span><span class="tag">MS SQL Server</span><span class="tag">GitLab</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2023 — 2024</div>
+        <div class="timeline-line">
+          <div class="timeline-dot"></div>
+          <div class="timeline-connector"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-org">Siemens Professional Education</div>
+          <div class="timeline-role">Technical Trainer — Industrial IoT &amp; Automation</div>
+          <div class="timeline-desc">Planning and delivery of training units in databases, programming, robotics, and IoT. Led projects including an automated labeling system. Introduced modern technologies such as Linux programming and Node-RED low-code development for IoT systems.</div>
+          <div class="timeline-tech">
+            <span class="tag">Node-RED</span><span class="tag">IoT2050</span><span class="tag">Linux</span><span class="tag">PLC</span><span class="tag">Robotics</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2022 — 2023</div>
+        <div class="timeline-line">
+          <div class="timeline-dot"></div>
+          <div class="timeline-connector"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-org">Bertrandt AG — Berlin</div>
+          <div class="timeline-role">Automation &amp; Control Systems Engineer</div>
+          <div class="timeline-desc">Specialization in automation and control systems engineering. PLC programming (FUP, AWL, KOP), S7/TIA Portal project development, HMI solutions with WinCC flexible, and ABB robot programming for industrial automation processes.</div>
+          <div class="timeline-tech">
+            <span class="tag">TIA Portal</span><span class="tag">WinCC</span><span class="tag">ABB Robotics</span><span class="tag">S7</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2021 — 2022</div>
+        <div class="timeline-line">
+          <div class="timeline-dot"></div>
+          <div class="timeline-connector"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-org">Siemens AG — Energy Division</div>
+          <div class="timeline-role">Specialist — Charger Systems</div>
+          <div class="timeline-desc">Specialization in automation and control for Siemens energy distribution systems. PLC programming, Factory I/O simulation, and certified Siemens Charger Systems specialist (Siemens AG, Leipzig).</div>
+          <div class="timeline-tech">
+            <span class="tag">Siemens Charger</span><span class="tag">Factory I/O</span><span class="tag">S5/Simatic</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-wrap">
+    <p class="sec-label">// research</p>
+    <h2 class="sec-title">Publications &amp; conferences</h2>
+    <p class="sec-desc">Research at the intersection of AI, control systems, and intelligent industrial automation.</p>
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="research-year">2025 · INVITED</div>
+        <div class="research-title">1st International Workshop on Neuro-Symbolic Software Engineering</div>
+        <div class="research-venue">Ottawa, Canada</div>
+        <div class="research-desc">Invited to present research on the integration of Fuzzy Logic, Neural Networks, and symbolic control for adaptive IoT systems — connecting neuro-symbolic approaches to industrial AI challenges.</div>
+      </div>
+      <div class="research-card">
+        <div class="research-year">2025 · INVITED</div>
+        <div class="research-title">16th AUTOSAR Open Conference</div>
+        <div class="research-venue">Bruges, Belgium</div>
+        <div class="research-desc">Invited presentation on the interface of AUTOSAR to other software technologies, covering AI Co-Pilot systems and the integration of IoT and AI in vehicle technology.</div>
+      </div>
+      <div class="research-card">
+        <div class="research-year">2016 · PUBLISHED</div>
+        <div class="research-title">Optimal Design of PID Controller with Neural-Fuzzy Algorithm for Hydraulic Servo Cylinder</div>
+        <div class="research-venue">4th International Conference on Science &amp; Engineering, Rome, Italy</div>
+        <div class="research-desc">Research on ANFIS-based optimization of PID controllers for hydraulic servo systems — combining fuzzy logic and neural network approaches for precise industrial control.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision">
+  <div class="section-wrap">
+    <p class="sec-label">// startup vision</p>
+    <h2 class="sec-title">Deep-Tech founder ambition</h2>
+    <p class="sec-desc">Building toward a future AI startup focused on cognitive industrial intelligence.</p>
+    <div class="vision-box">
+      <div class="vision-headline">Cognitive Industrial <span>AI Systems</span></div>
+      <div class="vision-text">An intelligent software platform combining Artificial Intelligence, Robotics, IoT, Digital Twins, and Industrial Automation to support engineers in predictive maintenance, decision support, intelligent manufacturing, and autonomous industrial environments. Currently exploring European Deep-Tech Accelerators including xG Incubator, KI PredWiT, and the JARVIS Evaluator program.</div>
+      <div class="vision-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">🔮</div>
+          <div class="pillar-label">Predictive Maintenance</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤖</div>
+          <div class="pillar-label">Autonomous Systems</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🏭</div>
+          <div class="pillar-label">Smart Manufacturing</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🔗</div>
+          <div class="pillar-label">Digital Twin</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">⚡</div>
+          <div class="pillar-label">Edge AI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-wrap">
+    <p class="sec-label">// education</p>
+    <h2 class="sec-title">Academic background</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">MSc · Informatics (incomplete)</div>
+        <div class="edu-title">Machine Learning &amp; IoT</div>
+        <div class="edu-institution">Technische Universität Berlin, Germany</div>
+        <div class="edu-meta">2017 – 2019 · Focus: ML, Deep Learning, IIoT</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">MSc · Mechatronics Engineering</div>
+        <div class="edu-title">Advanced Robotics &amp; Industrial AI</div>
+        <div class="edu-institution">Azad University (IAU), Sanandaj, Iran</div>
+        <div class="edu-meta">2010 – 2012 · Grade: 1.6 · Recognised in Germany</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">BSc · Software Engineering</div>
+        <div class="edu-title">Computer Science</div>
+        <div class="edu-institution">University of Urmia, Iran</div>
+        <div class="edu-meta">2006 – 2010 · Recognised in Germany</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Certifications</div>
+        <div class="edu-title">AEVO · EFK · Siemens Charger</div>
+        <div class="edu-institution">IHK Berlin · Siemens AG</div>
+        <div class="edu-meta">2022–2024 · Vocational trainer certified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <p class="sec-label">// contact</p>
+    <h2 class="sec-title">Let's connect</h2>
+    <p class="sec-desc">Open to research collaborations, PhD opportunities, European projects, and startup conversations.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>Whether you're a researcher, accelerator, or industry partner — I'm always open to meaningful conversations about AI, robotics, and the future of intelligent manufacturing.</p>
+        <div class="contact-items">
+          <a class="contact-item" href="mailto:heidemann.shahrouz@gmail.com">
+            <div class="contact-item-icon">✉️</div>
+            heidemann.shahrouz@gmail.com
+          </a>
+          <a class="contact-item" href="tel:+4917632607745">
+            <div class="contact-item-icon">📱</div>
+            +49 176 32607745
+          </a>
+          <a class="contact-item" href="https://www.linkedin.com/in/shahrouz-heidemann" target="_blank">
+            <div class="contact-item-icon">💼</div>
+            linkedin.com/in/shahrouz-heidemann
+          </a>
+          <a class="contact-item" href="https://git.tu-berlin.de/heidemann.shahrouz" target="_blank">
+            <div class="contact-item-icon">⌨️</div>
+            git.tu-berlin.de/heidemann.shahrouz
+          </a>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            Potsdam, Germany
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-info">
+        <h3>Currently open to</h3>
+        <p>Looking for collaborations, funded research positions, and deep-tech accelerator partnerships in Germany and Europe.</p>
+        <div class="open-to">
+          <div class="open-item"><span class="open-dot"></span>PhD opportunities in AI / Robotics</div>
+          <div class="open-item"><span class="open-dot"></span>Horizon Europe research projects</div>
+          <div class="open-item"><span class="open-dot"></span>Deep-Tech accelerator programs</div>
+          <div class="open-item"><span class="open-dot"></span>Industrial AI consulting</div>
+          <div class="open-item"><span class="open-dot"></span>Co-founder / research partner</div>
+          <div class="open-item"><span class="open-dot"></span>Conference &amp; workshop invitations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span style="font-family:var(--mono);color:var(--text3)">© 2025 Shahrouz Heidemann · Potsdam, Germany · Built with precision</span>
+</footer>
+
+<script>
+// Animated particle network canvas
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function initParticles() {
+  particles = Array.from({length: 55}, () => ({
+    x: Math.random() * W,
+    y: Math.random() * H,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    r: Math.random() * 1.5 + 0.5
+  }));
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  // connections
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 160) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(59,158,255,${0.15 * (1 - dist/160)})`;
+        ctx.lineWidth = 0.5;
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+  // dots
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(99,179,237,0.5)';
+    ctx.fill();
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > W) p.vx *= -1;
+    if (p.y < 0 || p.y > H) p.vy *= -1;
+  });
+  requestAnimationFrame(draw);
+}
+
+resize();
+initParticles();
+draw();
+window.addEventListener('resize', () => { resize(); initParticles(); });
+
+// Smooth scroll offset for fixed nav
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({ top: target.offsetTop - 72, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
