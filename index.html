@@ -1,577 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shahrouz Heidemann — AI Engineer & Researcher</title>
-<meta name="description" content="AI Engineer, Robotics Specialist & Software Developer at TU Berlin. Building intelligent cognitive industrial systems.">
+<meta name="description" content="AI Engineer, Robotics Specialist & Software Developer at TU Berlin.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #080b12;
+/* ── Themes ── */
+[data-theme="dark"] {
+  --bg: #07090f;
   --bg2: #0d1117;
-  --bg3: #111827;
-  --surface: #161d2e;
-  --surface2: #1e2a3e;
-  --border: rgba(99,179,237,0.12);
+  --surface: #131929;
+  --surface2: #1a2235;
+  --border: rgba(99,179,237,0.1);
   --border2: rgba(99,179,237,0.22);
   --accent: #3b9eff;
   --accent2: #63b3ed;
-  --accent-glow: rgba(59,158,255,0.18);
-  --text: #e8edf5;
-  --text2: #94a3b8;
-  --text3: #64748b;
-  --mono: 'JetBrains Mono', monospace;
-  --sans: 'Inter', sans-serif;
+  --accent-glow: rgba(59,158,255,0.14);
+  --text: #e2e8f4;
+  --text2: #8fa3bf;
+  --text3: #4e6280;
+  --nav-bg: rgba(7,9,15,0.88);
+  --card-bg: #131929;
+  --tag-bg: rgba(59,158,255,0.08);
+  --tag-border: rgba(59,158,255,0.2);
+  --hero-sub: #6b85a3;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  overflow-x: hidden;
+[data-theme="light"] {
+  --bg: #f7f9fc;
+  --bg2: #eef2f8;
+  --surface: #ffffff;
+  --surface2: #f0f4fa;
+  --border: rgba(59,130,246,0.12);
+  --border2: rgba(59,130,246,0.28);
+  --accent: #1d6fd6;
+  --accent2: #2563eb;
+  --accent-glow: rgba(29,111,214,0.1);
+  --text: #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --nav-bg: rgba(247,249,252,0.92);
+  --card-bg: #ffffff;
+  --tag-bg: rgba(29,111,214,0.07);
+  --tag-border: rgba(29,111,214,0.2);
+  --hero-sub: #64748b;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;transition:background .3s,color .3s}
 
-/* ── Canvas ── */
-#canvas {
-  position: fixed; top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0; pointer-events: none;
-  opacity: 0.45;
-}
+/* Canvas */
+#canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.35;transition:opacity .3s}
+[data-theme="light"] #canvas{opacity:.12}
 
-/* ── Nav ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 2.5rem;
-  height: 64px;
-  background: rgba(8,11,18,0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  transition: background 0.3s;
-}
-.nav-logo {
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--accent2);
-  letter-spacing: 0.02em;
-  text-decoration: none;
-}
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a {
-  font-size: 13px;
-  color: var(--text2);
-  text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--text); }
-.nav-cta {
-  font-size: 13px; font-weight: 500;
-  color: var(--accent);
-  border: 1px solid var(--border2);
-  padding: 7px 18px;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: background 0.2s, border-color 0.2s;
-}
-.nav-cta:hover { background: var(--accent-glow); border-color: var(--accent); }
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:62px;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:background .3s}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;color:var(--accent2);text-decoration:none;letter-spacing:.02em}
+.nav-center{display:flex;gap:1.75rem;list-style:none}
+.nav-center a{font-size:13px;color:var(--text2);text-decoration:none;letter-spacing:.02em;transition:color .2s}
+.nav-center a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:12px}
+
+/* Language toggle */
+.lang-btn{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;overflow:hidden;font-size:12px;font-weight:500}
+.lang-btn button{padding:5px 10px;background:none;border:none;cursor:pointer;color:var(--text2);transition:background .2s,color .2s;font-family:inherit;font-size:12px;font-weight:500}
+.lang-btn button.active{background:var(--accent);color:#fff}
+
+/* Theme toggle */
+.theme-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);transition:background .2s,color .2s;font-size:16px}
+.theme-btn:hover{background:var(--surface);color:var(--text)}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:8rem 2rem 4rem;text-align:center;position:relative;z-index:1}
+.hero-inner{max-width:820px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);border:1px solid var(--border2);padding:6px 16px;border-radius:100px;margin-bottom:2rem;background:var(--accent-glow);letter-spacing:.06em}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:blink 2.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-size:clamp(2.6rem,5.5vw,4.6rem);font-weight:300;line-height:1.08;letter-spacing:-.035em;margin-bottom:.5rem}
+h1 em{font-style:normal;color:var(--accent);font-weight:500}
+.hero-role{font-size:clamp(.95rem,1.8vw,1.15rem);color:var(--hero-sub);font-weight:300;margin-bottom:1.2rem;letter-spacing:.01em}
+.hero-desc{font-size:.95rem;color:var(--text2);max-width:580px;margin:0 auto 2.6rem;line-height:1.85}
+.hero-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{font-size:13px;font-weight:500;background:var(--accent);color:#fff;padding:11px 26px;border-radius:8px;text-decoration:none;transition:opacity .2s,transform .2s;display:inline-flex;align-items:center;gap:7px}
+.btn-primary:hover{opacity:.85;transform:translateY(-1px)}
+.btn-outline{font-size:13px;font-weight:500;color:var(--accent2);border:1px solid var(--border2);padding:11px 22px;border-radius:8px;text-decoration:none;transition:background .2s,color .2s;display:inline-flex;align-items:center;gap:7px}
+.btn-outline:hover{background:var(--accent-glow);color:var(--text)}
+.hero-stats{display:flex;gap:2.5rem;justify-content:center;margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.stat-val{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:300;color:var(--accent2);display:block}
+.stat-label{font-size:11px;color:var(--text3);letter-spacing:.07em;text-transform:uppercase}
 
 /* ── Sections ── */
-section { position: relative; z-index: 1; }
+section{position:relative;z-index:1}
+.wrap{max-width:980px;margin:0 auto;padding:5.5rem 2rem}
+.sec-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.sec-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;letter-spacing:-.02em;margin-bottom:.7rem}
+.sec-sub{font-size:.95rem;color:var(--text2);max-width:520px;line-height:1.8;margin-bottom:2.5rem}
+.divider{border:none;border-top:1px solid var(--border)}
 
-/* ── Hero ── */
-#hero {
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  padding: 8rem 2rem 4rem;
-  text-align: center;
-}
-.hero-inner { max-width: 860px; }
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent2);
-  border: 1px solid var(--border2);
-  padding: 6px 16px;
-  border-radius: 100px;
-  margin-bottom: 2.2rem;
-  background: rgba(59,158,255,0.07);
-  letter-spacing: 0.06em;
-}
-.hero-badge-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #4ade80;
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}
-h1 {
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.6rem;
-  color: var(--text);
-}
-h1 span {
-  color: var(--accent);
-  font-weight: 500;
-}
-.hero-sub {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--text2);
-  font-weight: 300;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.01em;
-}
-.hero-desc {
-  font-size: 1rem;
-  color: var(--text3);
-  max-width: 600px;
-  margin: 0 auto 2.8rem;
-  line-height: 1.8;
-}
-.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-.btn-primary {
-  font-size: 14px; font-weight: 500;
-  background: var(--accent);
-  color: #fff;
-  padding: 12px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: opacity 0.2s, transform 0.2s;
-}
-.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-.btn-cv {
-  font-size: 14px; font-weight: 500;
-  color: var(--accent2);
-  border: 1px solid var(--border2);
-  padding: 12px 24px;
-  border-radius: 8px;
-  text-decoration: none;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: background 0.2s, color 0.2s;
-}
-.btn-cv:hover { background: var(--accent-glow); color: var(--text); }
-  font-size: 14px; font-weight: 500;
-  color: var(--text2);
-  border: 1px solid var(--border2);
-  padding: 12px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
-}
-.btn-secondary:hover { background: var(--surface); color: var(--text); }
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:220px 1fr;gap:3.5rem;align-items:start;margin-top:2.5rem}
+.avatar-wrap{display:flex;flex-direction:column;align-items:center;gap:1.2rem}
+.avatar{width:160px;height:160px;border-radius:50%;border:2px solid var(--border2);background:var(--surface2);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 32px var(--accent-glow)}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.avatar-initials{font-family:'JetBrains Mono',monospace;font-size:2.5rem;font-weight:300;color:var(--accent2)}
+.socials{display:flex;flex-direction:column;gap:8px;width:100%}
+.social-link{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--text2);text-decoration:none;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);transition:border-color .2s,color .2s}
+.social-link:hover{border-color:var(--border2);color:var(--text)}
+.social-link svg{width:14px;height:14px;flex-shrink:0;opacity:.7}
+.about-text p{font-size:.93rem;color:var(--text2);line-height:1.9;margin-bottom:1rem}
+.about-text p strong{color:var(--text);font-weight:500}
+.about-text p:last-child{margin-bottom:0}
 
-.hero-stats {
-  display: flex; gap: 3rem; justify-content: center;
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-}
-.stat-val {
-  font-size: 1.75rem;
-  font-weight: 300;
-  color: var(--accent2);
-  font-family: var(--mono);
-  display: block;
-}
-.stat-label {
-  font-size: 11px;
-  color: var(--text3);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:2.5rem}
+.skill-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem;transition:border-color .2s,transform .2s}
+.skill-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.skill-icon{font-size:1.3rem;margin-bottom:.75rem}
+.skill-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:.65rem}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent2);background:var(--tag-bg);border:1px solid var(--tag-border);padding:3px 9px;border-radius:4px}
 
-/* ── Section headers ── */
-.section-wrap { max-width: 1000px; margin: 0 auto; padding: 6rem 2rem; }
-.sec-label {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 0.6rem;
-}
-.sec-title {
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  margin-bottom: 0.8rem;
-}
-.sec-desc {
-  font-size: 1rem;
-  color: var(--text2);
-  max-width: 560px;
-  line-height: 1.8;
-}
+/* ── EXPERIENCE ── */
+.timeline{margin-top:2.5rem;display:flex;flex-direction:column}
+.tl-item{display:grid;grid-template-columns:120px 24px 1fr;gap:0 1.5rem;padding-bottom:2.2rem}
+.tl-item:last-child{padding-bottom:0}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);text-align:right;padding-top:3px;letter-spacing:.03em}
+.tl-spine{display:flex;flex-direction:column;align-items:center}
+.tl-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:3px;box-shadow:0 0 0 3px var(--accent-glow)}
+.tl-line{width:1px;flex:1;background:var(--border);margin-top:5px}
+.tl-item:last-child .tl-line{display:none}
+.tl-org{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);margin-bottom:2px;letter-spacing:.03em}
+.tl-role{font-size:15px;font-weight:500;color:var(--text);margin-bottom:.5rem}
+.tl-desc{font-size:13px;color:var(--text2);line-height:1.75}
+.tl-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:.65rem}
 
-/* ── About ── */
-#about { border-top: 1px solid var(--border); }
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  margin-top: 3rem;
-  align-items: start;
-}
-.about-photo-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-.avatar {
-  width: 180px; height: 180px;
-  border-radius: 50%;
-  border: 2px solid var(--border2);
-  background: var(--surface2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 4rem;
-  box-shadow: 0 0 40px rgba(59,158,255,0.15);
-  font-weight: 300;
-  color: var(--accent2);
-  font-family: var(--mono);
-  letter-spacing: -0.03em;
-}
-.contact-links { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-.contact-link {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 13px; color: var(--text2);
-  text-decoration: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  transition: border-color 0.2s, color 0.2s;
-}
-.contact-link:hover { border-color: var(--border2); color: var(--text); }
-.contact-link svg { width: 16px; height: 16px; opacity: 0.7; flex-shrink: 0; }
-.about-text p {
-  font-size: 0.95rem;
-  color: var(--text2);
-  line-height: 1.9;
-  margin-bottom: 1.2rem;
-}
-.about-text p strong { color: var(--text); font-weight: 500; }
+/* ── PROJECTS ── */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:2.5rem}
+.proj-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.6rem;display:flex;flex-direction:column;gap:.75rem;transition:border-color .2s,transform .2s}
+.proj-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.proj-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.proj-icon{font-size:1.4rem}
+.proj-type{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--accent2);background:var(--tag-bg);border:1px solid var(--tag-border);padding:3px 9px;border-radius:100px;white-space:nowrap}
+.proj-title{font-size:15px;font-weight:500;color:var(--text)}
+.proj-desc{font-size:13px;color:var(--text2);line-height:1.72;flex:1}
+.proj-footer{display:flex;flex-wrap:wrap;gap:5px;margin-top:.3rem}
 
-/* ── Skills ── */
-#skills { border-top: 1px solid var(--border); }
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 3rem;
-}
-.skill-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: border-color 0.2s, transform 0.2s;
-}
-.skill-card:hover { border-color: var(--border2); transform: translateY(-2px); }
-.skill-card-icon {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-.skill-card-title {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 0.8rem;
-}
-.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.tag {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent2);
-  background: rgba(59,158,255,0.08);
-  border: 1px solid rgba(59,158,255,0.2);
-  padding: 3px 10px;
-  border-radius: 4px;
-}
+/* ── RESEARCH ── */
+.research-list{display:flex;flex-direction:column;gap:14px;margin-top:2.5rem}
+.res-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem;display:grid;grid-template-columns:90px 1fr;gap:0 1.5rem;transition:border-color .2s}
+.res-card:hover{border-color:var(--border2)}
+.res-year{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);font-weight:500;padding-top:2px}
+.res-badge{display:inline-block;font-size:9px;font-family:'JetBrains Mono',monospace;padding:2px 8px;border-radius:4px;margin-top:4px}
+.res-badge.pub{background:rgba(74,222,128,.1);color:#4ade80;border:1px solid rgba(74,222,128,.25)}
+.res-badge.inv{background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.25)}
+.res-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:.3rem}
+.res-venue{font-size:12px;color:var(--accent2);margin-bottom:.5rem}
+.res-desc{font-size:13px;color:var(--text2);line-height:1.7}
 
-/* ── Experience ── */
-#experience { border-top: 1px solid var(--border); }
-.timeline { margin-top: 3rem; display: flex; flex-direction: column; gap: 0; }
-.timeline-item {
-  display: grid;
-  grid-template-columns: 140px 1px 1fr;
-  gap: 0 2rem;
-  padding-bottom: 2.5rem;
-}
-.timeline-item:last-child { padding-bottom: 0; }
-.timeline-date {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text3);
-  padding-top: 4px;
-  text-align: right;
-  letter-spacing: 0.04em;
-}
-.timeline-line {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.timeline-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-  margin-top: 4px;
-  box-shadow: 0 0 0 3px rgba(59,158,255,0.2);
-}
-.timeline-connector {
-  width: 1px;
-  flex: 1;
-  background: var(--border);
-  margin-top: 6px;
-}
-.timeline-item:last-child .timeline-connector { display: none; }
-.timeline-content { padding-bottom: 0.5rem; }
-.timeline-org {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--accent2);
-  margin-bottom: 2px;
-  font-family: var(--mono);
-}
-.timeline-role {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 0.6rem;
-}
-.timeline-desc {
-  font-size: 14px;
-  color: var(--text2);
-  line-height: 1.75;
-}
-.timeline-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.8rem; }
+/* ── VISION ── */
+.vision-box{background:var(--card-bg);border:1px solid var(--border2);border-radius:16px;padding:2.5rem;margin-top:2.5rem;position:relative;overflow:hidden}
+.vision-glow{position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
+.vision-headline{font-size:1.35rem;font-weight:300;letter-spacing:-.02em;margin-bottom:.8rem}
+.vision-headline span{color:var(--accent);font-weight:500}
+.vision-text{font-size:.9rem;color:var(--text2);line-height:1.85;max-width:660px;margin-bottom:1.75rem}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.pillar{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.9rem;text-align:center}
+.pillar-icon{font-size:1.2rem;margin-bottom:.4rem}
+.pillar-label{font-size:12px;color:var(--text2);font-weight:500}
 
-/* ── Research ── */
-#research { border-top: 1px solid var(--border); }
-.research-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  margin-top: 3rem;
-}
-.research-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.75rem;
-  transition: border-color 0.2s;
-}
-.research-card:hover { border-color: var(--border2); }
-.research-year {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text3);
-  margin-bottom: 0.8rem;
-  letter-spacing: 0.06em;
-}
-.research-title {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.5;
-  margin-bottom: 0.6rem;
-}
-.research-venue {
-  font-size: 13px;
-  color: var(--accent2);
-  margin-bottom: 0.8rem;
-}
-.research-desc {
-  font-size: 13px;
-  color: var(--text2);
-  line-height: 1.7;
-}
+/* ── EDUCATION ── */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:2.5rem}
+.edu-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.35rem;transition:border-color .2s}
+.edu-card:hover{border-color:var(--border2)}
+.edu-degree{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.06em;margin-bottom:.4rem}
+.edu-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:.25rem}
+.edu-inst{font-size:12px;color:var(--text2);margin-bottom:.4rem}
+.edu-meta{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace}
 
-/* ── Vision ── */
-#vision { border-top: 1px solid var(--border); }
-.vision-box {
-  margin-top: 3rem;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: 16px;
-  padding: 3rem;
-  position: relative;
-  overflow: hidden;
-}
-.vision-box::before {
-  content: '';
-  position: absolute;
-  top: -80px; right: -80px;
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(59,158,255,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-.vision-headline {
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: var(--text);
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
-}
-.vision-headline span { color: var(--accent); font-weight: 500; }
-.vision-text {
-  font-size: 0.95rem;
-  color: var(--text2);
-  line-height: 1.85;
-  max-width: 680px;
-  margin-bottom: 2rem;
-}
-.vision-pillars {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
-}
-.pillar {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-  text-align: center;
-}
-.pillar-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
-.pillar-label { font-size: 12px; color: var(--text2); font-weight: 500; }
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2.5rem}
+.contact-items{display:flex;flex-direction:column;gap:10px;margin-top:1rem}
+.contact-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2);text-decoration:none;transition:color .2s}
+.contact-row:hover{color:var(--accent2)}
+.contact-icon{width:34px;height:34px;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.open-box{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.open-box h3{font-size:14px;font-weight:500;color:var(--text);margin-bottom:.5rem}
+.open-box p{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:1.2rem}
+.open-list{display:flex;flex-direction:column;gap:7px}
+.open-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2)}
+.open-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;flex-shrink:0}
 
-/* ── Education ── */
-#education { border-top: 1px solid var(--border); }
-.edu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  margin-top: 3rem;
-}
-.edu-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: border-color 0.2s;
-}
-.edu-card:hover { border-color: var(--border2); }
-.edu-degree {
-  font-size: 11px;
-  font-family: var(--mono);
-  color: var(--accent);
-  letter-spacing: 0.06em;
-  margin-bottom: 0.5rem;
-}
-.edu-title {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 0.3rem;
-}
-.edu-institution {
-  font-size: 13px;
-  color: var(--text2);
-  margin-bottom: 0.5rem;
-}
-.edu-meta {
-  font-size: 12px;
-  color: var(--text3);
-  font-family: var(--mono);
-}
+/* Footer */
+footer{border-top:1px solid var(--border);padding:1.75rem 2rem;text-align:center;font-size:12px;color:var(--text3);font-family:'JetBrains Mono',monospace;position:relative;z-index:1}
 
-/* ── Contact ── */
-#contact { border-top: 1px solid var(--border); }
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  margin-top: 3rem;
-}
-.contact-info p {
-  font-size: 0.95rem;
-  color: var(--text2);
-  line-height: 1.85;
-  margin-bottom: 2rem;
-}
-.contact-items { display: flex; flex-direction: column; gap: 12px; }
-.contact-item {
-  display: flex; align-items: center; gap: 12px;
-  font-size: 14px; color: var(--text2);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.contact-item:hover { color: var(--accent2); }
-.contact-item-icon {
-  width: 36px; height: 36px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
-  flex-shrink: 0;
-}
-.contact-form-info {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem;
-}
-.contact-form-info h3 {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 0.6rem;
-}
-.contact-form-info p {
-  font-size: 13px;
-  color: var(--text2);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-.open-to { display: flex; flex-direction: column; gap: 8px; }
-.open-item {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 13px; color: var(--text2);
-}
-.open-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+/* Mobile nav */
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px}
+.hamburger span{display:block;width:20px;height:1.5px;background:var(--text2);border-radius:2px;transition:.2s}
+.mobile-menu{display:none;position:fixed;top:62px;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1rem 2rem;z-index:199;flex-direction:column;gap:.75rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:14px;color:var(--text2);text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--border)}
 
-/* ── Footer ── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 2rem;
-  text-align: center;
-  font-size: 12px;
-  color: var(--text3);
-  font-family: var(--mono);
-  position: relative; z-index: 1;
+@media(max-width:768px){
+  nav{padding:0 1.25rem}
+  .nav-center{display:none}
+  .hamburger{display:flex}
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+  .contact-grid{grid-template-columns:1fr;gap:2rem}
+  .tl-item{grid-template-columns:80px 20px 1fr;gap:0 1rem}
+  .res-card{grid-template-columns:1fr;gap:.5rem}
+  .hero-stats{gap:1.5rem}
+  .wrap{padding:4rem 1.25rem}
 }
-
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  nav { padding: 0 1.25rem; }
-  .nav-links { display: none; }
-  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .timeline-item { grid-template-columns: 90px 1px 1fr; gap: 0 1rem; }
-  .hero-stats { gap: 1.5rem; }
-  .section-wrap { padding: 4rem 1.25rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -581,389 +223,400 @@ footer {
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">SH.dev</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#vision">Vision</a></li>
-    <li><a href="#contact">Contact</a></li>
+  <ul class="nav-center">
+    <li><a href="#about" data-en="About" data-de="Über mich">About</a></li>
+    <li><a href="#skills" data-en="Skills" data-de="Kenntnisse">Skills</a></li>
+    <li><a href="#experience" data-en="Experience" data-de="Erfahrung">Experience</a></li>
+    <li><a href="#projects" data-en="Projects" data-de="Projekte">Projects</a></li>
+    <li><a href="#research" data-en="Research" data-de="Forschung">Research</a></li>
+    <li><a href="#vision" data-en="Vision" data-de="Vision">Vision</a></li>
+    <li><a href="#contact" data-en="Contact" data-de="Kontakt">Contact</a></li>
   </ul>
-  <a class="nav-cta" href="mailto:heidemann.shahrouz@gmail.com">Get in touch</a>
+  <div class="nav-right">
+    <div class="lang-btn">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button id="btn-de" onclick="setLang('de')">DE</button>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light/dark mode">☀️</button>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="toggleMenu()">About / Über mich</a>
+  <a href="#skills" onclick="toggleMenu()">Skills</a>
+  <a href="#experience" onclick="toggleMenu()">Experience / Erfahrung</a>
+  <a href="#projects" onclick="toggleMenu()">Projects / Projekte</a>
+  <a href="#research" onclick="toggleMenu()">Research / Forschung</a>
+  <a href="#vision" onclick="toggleMenu()">Vision</a>
+  <a href="#contact" onclick="toggleMenu()">Contact / Kontakt</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      Available for collaborations &amp; PhD opportunities
+      <span class="badge-dot"></span>
+      <span data-en="Available for collaborations & PhD opportunities" data-de="Offen für Kooperationen & Doktorandenstellen">Available for collaborations & PhD opportunities</span>
     </div>
-    <h1>Shahrouz<br><span>Heidemann</span></h1>
-    <p class="hero-sub">AI Engineer · Robotics · Software Developer @ TU Berlin</p>
-    <p class="hero-desc">Building intelligent cognitive industrial systems at the intersection of Artificial Intelligence, Robotics, and Industry 4.0.</p>
-    <div class="hero-actions">
-      <a class="btn-primary" href="#contact">Contact me</a>
-      <a class="btn-cv" href="CV_Shahrouz_Heidemann.pdf" download title="Download CV as PDF">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download CV
+    <h1>Shahrouz<br><em>Heidemann</em></h1>
+    <p class="hero-role" data-en="AI Engineer · Robotics · Software Developer @ TU Berlin" data-de="KI-Ingenieur · Robotik · Softwareentwickler @ TU Berlin">AI Engineer · Robotics · Software Developer @ TU Berlin</p>
+    <p class="hero-desc" data-en="Building intelligent cognitive industrial systems at the intersection of AI, Robotics, and Industry 4.0." data-de="Entwicklung intelligenter kognitiver Industriesysteme an der Schnittstelle von KI, Robotik und Industrie 4.0.">Building intelligent cognitive industrial systems at the intersection of AI, Robotics, and Industry 4.0.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="mailto:heidemann.shahrouz@gmail.com">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span data-en="Get in touch" data-de="Kontakt aufnehmen">Get in touch</span>
       </a>
-      <a class="btn-secondary" href="#experience">View experience</a>
+      <a class="btn-outline" href="CV_Shahrouz_Heidemann.pdf" download>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-en="Download CV" data-de="Lebenslauf herunterladen">Download CV</span>
+      </a>
+      <a class="btn-outline" href="#projects">
+        <span data-en="View projects" data-de="Projekte ansehen">View projects</span>
+      </a>
     </div>
     <div class="hero-stats">
-      <div>
-        <span class="stat-val">5+</span>
-        <span class="stat-label">Years industry</span>
-      </div>
-      <div>
-        <span class="stat-val">3</span>
-        <span class="stat-label">Intl. conferences</span>
-      </div>
-      <div>
-        <span class="stat-val">AI</span>
-        <span class="stat-label">Core focus</span>
-      </div>
-      <div>
-        <span class="stat-val">MSc</span>
-        <span class="stat-label">Mechatronics</span>
-      </div>
+      <div><span class="stat-val">5+</span><span class="stat-label" data-en="Years industry" data-de="Jahre Industrie">Years industry</span></div>
+      <div><span class="stat-val">3</span><span class="stat-label" data-en="Int'l conferences" data-de="Int. Konferenzen">Int'l conferences</span></div>
+      <div><span class="stat-val">MSc</span><span class="stat-label" data-en="Mechatronics" data-de="Mechatronik">Mechatronics</span></div>
+      <div><span class="stat-val">AI</span><span class="stat-label" data-en="Core focus" data-de="Schwerpunkt">Core focus</span></div>
     </div>
   </div>
 </section>
 
+<hr class="divider" style="position:relative;z-index:1">
+
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-wrap">
-    <p class="sec-label">// about</p>
-    <h2 class="sec-title">Interdisciplinary engineer<br>at the edge of AI &amp; industry</h2>
+  <div class="wrap">
+    <p class="sec-eyebrow">// about</p>
+    <h2 class="sec-title" data-en="Engineer at the edge of AI & industry" data-de="Ingenieur an der Grenze von KI & Industrie">Engineer at the edge of AI & industry</h2>
     <div class="about-grid">
-      <div class="about-photo-wrap">
-        <div class="avatar" id="avatar-wrap">
-          <img id="avatar-img" src="photo.jpg" alt="Shahrouz Heidemann" onerror="this.style.display='none';document.getElementById('avatar-initials').style.display='flex'" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block">
-          <span id="avatar-initials" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:3rem;font-weight:300;color:var(--accent2);font-family:var(--mono)">SH</span>
+      <div class="avatar-wrap">
+        <div class="avatar">
+          <img src="photo.jpg" alt="Shahrouz Heidemann" onerror="this.style.display='none';document.getElementById('av-init').style.display='flex'">
+          <span id="av-init" style="display:none;width:100%;height:100%;align-items:center;justify-content:center" class="avatar-initials">SH</span>
         </div>
-        <p style="font-size:11px;color:var(--text3);font-family:var(--mono);text-align:center">Foto: photo.jpg im selben Ordner</p>
-        <div class="contact-links">
-          <a class="contact-link" href="https://www.linkedin.com/in/shahrouz-heidemann" target="_blank">
+        <div class="socials">
+          <a class="social-link" href="https://www.linkedin.com/in/shahrouz-heidemann" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            linkedin.com/in/shahrouz-heidemann
+            LinkedIn
           </a>
-          <a class="contact-link" href="https://git.tu-berlin.de/heidemann.shahrouz" target="_blank">
+          <a class="social-link" href="https://git.tu-berlin.de/heidemann.shahrouz" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 006 0v-1a10 10 0 10-3.92 7.94"/></svg>
-            git.tu-berlin.de/heidemann.shahrouz
+            GitLab TU Berlin
           </a>
-          <a class="contact-link" href="mailto:heidemann.shahrouz@gmail.com">
+          <a class="social-link" href="mailto:heidemann.shahrouz@gmail.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             heidemann.shahrouz@gmail.com
           </a>
-          <a class="contact-link" href="tel:+4917632607745">
+          <a class="social-link" href="tel:+4917632607745">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             +49 176 32607745
           </a>
         </div>
       </div>
       <div class="about-text">
-        <p>I am an interdisciplinary engineer with a background in <strong>Computer Engineering and Mechatronics Engineering</strong>, specializing in Artificial Intelligence, Machine Learning, Robotics, Embedded Systems, IoT, and Industry 4.0.</p>
-        <p>Currently working as a <strong>Software Developer at Technische Universität Berlin</strong>, where I develop software solutions and contribute to digital transformation and information management (TV-L E12).</p>
-        <p>My long-term vision is to bridge <strong>AI, Robotics, and Industrial Automation</strong> by developing intelligent cognitive systems that support engineers and manufacturing environments — ultimately building a Deep-Tech startup in this space.</p>
-        <p>I am passionate about applying AI research to real-world industrial challenges, and actively seeking collaborations with research groups, European accelerators, and Horizon Europe projects.</p>
+        <p data-en="I am an interdisciplinary engineer with a background in <strong>Computer Engineering and Mechatronics</strong>, specializing in Artificial Intelligence, Machine Learning, Robotics, IoT, and Industry 4.0 systems." data-de="Ich bin ein interdisziplinärer Ingenieur mit Hintergrund in <strong>Informatik und Mechatronik</strong>, spezialisiert auf Künstliche Intelligenz, maschinelles Lernen, Robotik, IoT und Industrie-4.0-Systeme.">I am an interdisciplinary engineer with a background in <strong>Computer Engineering and Mechatronics</strong>, specializing in Artificial Intelligence, Machine Learning, Robotics, IoT, and Industry 4.0 systems.</p>
+        <p data-en="Currently working as a <strong>Software Developer at Technische Universität Berlin</strong> (TV-L E12), contributing to digital transformation, application development, and information management." data-de="Derzeit als <strong>Softwareentwickler an der Technischen Universität Berlin</strong> (TV-L E12) tätig, mit Beiträgen zu digitaler Transformation, Applikationsentwicklung und Informationsmanagement.">Currently working as a <strong>Software Developer at Technische Universität Berlin</strong> (TV-L E12), contributing to digital transformation, application development, and information management.</p>
+        <p data-en="My long-term vision is to bridge <strong>AI, Robotics, and Industrial Automation</strong> — building intelligent cognitive systems for engineers and manufacturing environments, and ultimately founding a Deep-Tech startup in this space." data-de="Meine langfristige Vision ist es, <strong>KI, Robotik und Industrieautomatisierung</strong> zu verbinden — intelligente kognitive Systeme für Ingenieure und Fertigungsumgebungen zu entwickeln und schließlich ein Deep-Tech-Startup in diesem Bereich zu gründen.">My long-term vision is to bridge <strong>AI, Robotics, and Industrial Automation</strong> — building intelligent cognitive systems for engineers and manufacturing environments, and ultimately founding a Deep-Tech startup in this space.</p>
+        <p data-en="📍 Potsdam, Germany" data-de="📍 Potsdam, Deutschland">📍 Potsdam, Germany</p>
       </div>
     </div>
   </div>
 </section>
+
+<hr class="divider" style="position:relative;z-index:1">
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-wrap">
-    <p class="sec-label">// core expertise</p>
-    <h2 class="sec-title">Technical skills</h2>
-    <p class="sec-desc">A broad stack built over years of industry and research — from embedded systems to cloud AI.</p>
+  <div class="wrap">
+    <p class="sec-eyebrow">// skills</p>
+    <h2 class="sec-title" data-en="Core expertise" data-de="Kernkompetenzen">Core expertise</h2>
+    <p class="sec-sub" data-en="A broad technical stack built across industry, research, and teaching." data-de="Ein breites technisches Spektrum aus Industrie, Forschung und Lehre.">A broad technical stack built across industry, research, and teaching.</p>
     <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-card-icon">🧠</div>
-        <div class="skill-card-title">Artificial Intelligence</div>
-        <div class="skill-tags">
-          <span class="tag">Machine Learning</span>
-          <span class="tag">Deep Learning</span>
-          <span class="tag">Neural Networks</span>
-          <span class="tag">ANFIS</span>
-          <span class="tag">Fuzzy Logic</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-icon">🤖</div>
-        <div class="skill-card-title">Robotics &amp; Automation</div>
-        <div class="skill-tags">
-          <span class="tag">ROS / ROS2</span>
-          <span class="tag">ABB Robotics</span>
-          <span class="tag">Cognitive Robotics</span>
-          <span class="tag">Computer Vision</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-icon">⚙️</div>
-        <div class="skill-card-title">Industrial Systems</div>
-        <div class="skill-tags">
-          <span class="tag">PLC (TIA Portal)</span>
-          <span class="tag">Industry 4.0</span>
-          <span class="tag">HMI (WinCC)</span>
-          <span class="tag">Digital Twin</span>
-          <span class="tag">IoT / IIoT</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-icon">💻</div>
-        <div class="skill-card-title">Software Development</div>
-        <div class="skill-tags">
-          <span class="tag">Python</span>
-          <span class="tag">C++</span>
-          <span class="tag">PHP</span>
-          <span class="tag">Node-RED</span>
-          <span class="tag">SQL</span>
-          <span class="tag">Git</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-icon">☁️</div>
-        <div class="skill-card-title">Infrastructure</div>
-        <div class="skill-tags">
-          <span class="tag">Linux</span>
-          <span class="tag">Docker</span>
-          <span class="tag">Cloud</span>
-          <span class="tag">Edge AI</span>
-          <span class="tag">MS SQL Server</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-icon">📐</div>
-        <div class="skill-card-title">Engineering Tools</div>
-        <div class="skill-tags">
-          <span class="tag">MATLAB</span>
-          <span class="tag">Simulink</span>
-          <span class="tag">Factory I/O</span>
-          <span class="tag">Embedded Systems</span>
-        </div>
-      </div>
+      <div class="skill-card"><div class="skill-icon">🧠</div><div class="skill-name" data-en="Artificial Intelligence" data-de="Künstliche Intelligenz">Artificial Intelligence</div><div class="tags"><span class="tag">Machine Learning</span><span class="tag">Deep Learning</span><span class="tag">Neural Networks</span><span class="tag">ANFIS</span><span class="tag">Fuzzy Logic</span></div></div>
+      <div class="skill-card"><div class="skill-icon">🤖</div><div class="skill-name" data-en="Robotics & Automation" data-de="Robotik & Automatisierung">Robotics & Automation</div><div class="tags"><span class="tag">ROS/ROS2</span><span class="tag">ABB Robotics</span><span class="tag">Cognitive Robotics</span><span class="tag">Computer Vision</span></div></div>
+      <div class="skill-card"><div class="skill-icon">⚙️</div><div class="skill-name" data-en="Industrial Systems" data-de="Industriesysteme">Industrial Systems</div><div class="tags"><span class="tag">PLC/TIA Portal</span><span class="tag">Industry 4.0</span><span class="tag">HMI/WinCC</span><span class="tag">Digital Twin</span><span class="tag">IIoT</span></div></div>
+      <div class="skill-card"><div class="skill-icon">💻</div><div class="skill-name" data-en="Software Development" data-de="Softwareentwicklung">Software Development</div><div class="tags"><span class="tag">Python</span><span class="tag">C++</span><span class="tag">PHP</span><span class="tag">Node-RED</span><span class="tag">SQL</span><span class="tag">Git</span></div></div>
+      <div class="skill-card"><div class="skill-icon">☁️</div><div class="skill-name" data-en="Infrastructure" data-de="Infrastruktur">Infrastructure</div><div class="tags"><span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">Edge AI</span><span class="tag">MS SQL Server</span><span class="tag">Cloud</span></div></div>
+      <div class="skill-card"><div class="skill-icon">📐</div><div class="skill-name" data-en="Engineering Tools" data-de="Ingenieurwerkzeuge">Engineering Tools</div><div class="tags"><span class="tag">MATLAB</span><span class="tag">Simulink</span><span class="tag">Factory I/O</span><span class="tag">Embedded Systems</span></div></div>
     </div>
   </div>
 </section>
+
+<hr class="divider" style="position:relative;z-index:1">
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-wrap">
-    <p class="sec-label">// experience</p>
-    <h2 class="sec-title">Professional timeline</h2>
-    <p class="sec-desc">Industry experience spanning software development, industrial automation, and AI research.</p>
+  <div class="wrap">
+    <p class="sec-eyebrow">// experience</p>
+    <h2 class="sec-title" data-en="Professional timeline" data-de="Beruflicher Werdegang">Professional timeline</h2>
+    <p class="sec-sub" data-en="From industrial automation to AI research and university software development." data-de="Von industrieller Automatisierung über KI-Forschung bis zur Softwareentwicklung an der Universität.">From industrial automation to AI research and university software development.</p>
     <div class="timeline">
 
-      <div class="timeline-item">
-        <div class="timeline-date">2024 — now</div>
-        <div class="timeline-line">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-org">Technische Universität Berlin</div>
-          <div class="timeline-role">Software Developer (Application Development)</div>
-          <div class="timeline-desc">Software development and digital transformation at TU Berlin (TV-L E12). Development of enterprise information systems, business process digitalization, and digital information management for research and teaching operations.</div>
-          <div class="timeline-tech">
-            <span class="tag">PHP</span><span class="tag">HTML</span><span class="tag">MS SQL Server</span><span class="tag">GitLab</span>
-          </div>
+      <div class="tl-item">
+        <div class="tl-date">2024 — now</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div>
+          <div class="tl-org">Technische Universität Berlin</div>
+          <div class="tl-role" data-en="Software Developer — Application Development" data-de="Softwareentwickler — Applikationsentwicklung">Software Developer — Application Development</div>
+          <div class="tl-desc" data-en="Enterprise software development and digital transformation at TU Berlin (TV-L E12). Business process digitalization, digital information management, and development of systems supporting research and teaching administration." data-de="Enterprise-Softwareentwicklung und digitale Transformation an der TU Berlin (TV-L E12). Digitalisierung von Geschäftsprozessen, digitales Informationsmanagement und Entwicklung von Systemen zur Unterstützung von Forschung und Lehrverwaltung.">Enterprise software development and digital transformation at TU Berlin (TV-L E12). Business process digitalization, digital information management, and development of systems supporting research and teaching administration.</div>
+          <div class="tl-tags"><span class="tag">PHP</span><span class="tag">HTML</span><span class="tag">MS SQL Server</span><span class="tag">GitLab</span></div>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-date">2023 — 2024</div>
-        <div class="timeline-line">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-org">Siemens Professional Education</div>
-          <div class="timeline-role">Technical Trainer — Industrial IoT &amp; Automation</div>
-          <div class="timeline-desc">Planning and delivery of training units in databases, programming, robotics, and IoT. Led projects including an automated labeling system. Introduced modern technologies such as Linux programming and Node-RED low-code development for IoT systems.</div>
-          <div class="timeline-tech">
-            <span class="tag">Node-RED</span><span class="tag">IoT2050</span><span class="tag">Linux</span><span class="tag">PLC</span><span class="tag">Robotics</span>
-          </div>
+      <div class="tl-item">
+        <div class="tl-date">2023 — 2024</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div>
+          <div class="tl-org">Siemens Professional Education</div>
+          <div class="tl-role" data-en="Technical Trainer — Industrial IoT & Automation" data-de="Ausbilder — Industrial IoT & Automatisierungstechnik">Technical Trainer — Industrial IoT & Automation</div>
+          <div class="tl-desc" data-en="Planning and delivery of training units in databases, programming, robotics, and IoT. Led development of an automated labeling system (Etikettierungsanlage). Introduced Node-RED low-code programming and Linux systems for IoT applications." data-de="Planung und Durchführung von Ausbildungseinheiten in Datenbanken, Programmierung, Robotik und IoT. Leitung der Entwicklung einer automatisierten Etikettierungsanlage. Einführung von Node-RED Low-Code-Programmierung und Linux-Systemen für IoT-Anwendungen.">Planning and delivery of training units in databases, programming, robotics, and IoT. Led development of an automated labeling system. Introduced Node-RED low-code programming and Linux systems for IoT applications.</div>
+          <div class="tl-tags"><span class="tag">Node-RED</span><span class="tag">IoT2050</span><span class="tag">Linux</span><span class="tag">PLC</span><span class="tag">AEVO IHK</span></div>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-date">2022 — 2023</div>
-        <div class="timeline-line">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-org">Bertrandt AG — Berlin</div>
-          <div class="timeline-role">Automation &amp; Control Systems Engineer</div>
-          <div class="timeline-desc">Specialization in automation and control systems engineering. PLC programming (FUP, AWL, KOP), S7/TIA Portal project development, HMI solutions with WinCC flexible, and ABB robot programming for industrial automation processes.</div>
-          <div class="timeline-tech">
-            <span class="tag">TIA Portal</span><span class="tag">WinCC</span><span class="tag">ABB Robotics</span><span class="tag">S7</span>
-          </div>
+      <div class="tl-item">
+        <div class="tl-date">2022 — 2023</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div>
+          <div class="tl-org">Bertrandt AG — Berlin</div>
+          <div class="tl-role" data-en="Automation & Control Systems Engineer" data-de="Automatisierungs- und Steuerungstechnik-Ingenieur">Automation & Control Systems Engineer</div>
+          <div class="tl-desc" data-en="PLC programming (FUP, AWL, KOP), S7/TIA Portal project development, HMI solutions with WinCC flexible, and ABB robot programming for industrial automation processes." data-de="SPS-Programmierung (FUP, AWL, KOP), S7/TIA-Portal-Projektentwicklung, HMI-Lösungen mit WinCC flexible und ABB-Roboterprogrammierung für industrielle Automatisierungsprozesse.">PLC programming (FUP, AWL, KOP), S7/TIA Portal project development, HMI solutions with WinCC flexible, and ABB robot programming for industrial automation processes.</div>
+          <div class="tl-tags"><span class="tag">TIA Portal</span><span class="tag">WinCC</span><span class="tag">ABB Robotics</span><span class="tag">S7</span></div>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-date">2021 — 2022</div>
-        <div class="timeline-line">
-          <div class="timeline-dot"></div>
-          <div class="timeline-connector"></div>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-org">Siemens AG — Energy Division</div>
-          <div class="timeline-role">Specialist — Charger Systems</div>
-          <div class="timeline-desc">Specialization in automation and control for Siemens energy distribution systems. PLC programming, Factory I/O simulation, and certified Siemens Charger Systems specialist (Siemens AG, Leipzig).</div>
-          <div class="timeline-tech">
-            <span class="tag">Siemens Charger</span><span class="tag">Factory I/O</span><span class="tag">S5/Simatic</span>
-          </div>
+      <div class="tl-item">
+        <div class="tl-date">2021 — 2022</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div>
+          <div class="tl-org">Siemens AG — Energy Division</div>
+          <div class="tl-role" data-en="Specialist — Charger Systems" data-de="Fachkraft — Charger-Systeme">Specialist — Charger Systems</div>
+          <div class="tl-desc" data-en="Automation and control for Siemens energy distribution systems. PLC programming, Factory I/O simulation. Certified Siemens Charger Systems specialist." data-de="Automatisierung und Steuerung für Siemens-Energieverteilungssysteme. SPS-Programmierung, Factory-I/O-Simulation. Zertifizierte Fachkraft für Siemens Charger-Systeme.">Automation and control for Siemens energy distribution systems. PLC programming, Factory I/O simulation. Certified Siemens Charger Systems specialist.</div>
+          <div class="tl-tags"><span class="tag">Siemens Charger</span><span class="tag">Factory I/O</span><span class="tag">S5/Simatic</span></div>
         </div>
       </div>
 
     </div>
   </div>
 </section>
+
+<hr class="divider" style="position:relative;z-index:1">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <p class="sec-eyebrow">// projects & portfolio</p>
+    <h2 class="sec-title" data-en="Selected projects" data-de="Ausgewählte Projekte">Selected projects</h2>
+    <p class="sec-sub" data-en="Hands-on work spanning industrial automation, AI applications, and research engineering." data-de="Praktische Projekte aus industrieller Automatisierung, KI-Anwendungen und ingenieurwissenschaftlicher Forschung.">Hands-on work spanning industrial automation, AI applications, and research engineering.</p>
+    <div class="projects-grid">
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-icon">🏭</div>
+          <span class="proj-type" data-en="Industrial Automation" data-de="Industrieautomatisierung">Industrial Automation</span>
+        </div>
+        <div class="proj-title" data-en="Automated Labeling System (Etikettierungsanlage)" data-de="Automatisierte Etikettierungsanlage">Automated Labeling System (Etikettierungsanlage)</div>
+        <div class="proj-desc" data-en="Led a team at Siemens AG to design and implement a fully automated labeling system for production lines. Included PLC programming, HMI interface development, sensor integration, and system testing. Delivered as part of the vocational training program." data-de="Leitung eines Teams bei Siemens AG zur Entwicklung und Implementierung einer vollautomatischen Etikettierungsanlage für Produktionslinien. Umfasste SPS-Programmierung, HMI-Schnittstellenentwicklung, Sensorintegration und Systemtests.">Led a team at Siemens AG to design and implement a fully automated labeling system for production lines. Included PLC programming, HMI interface development, sensor integration, and system testing.</div>
+        <div class="proj-footer"><span class="tag">PLC</span><span class="tag">HMI</span><span class="tag">Node-RED</span><span class="tag">IoT</span><span class="tag">Siemens</span></div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-icon">🏥</div>
+          <span class="proj-type" data-en="AI / Healthcare" data-de="KI / Gesundheit">AI / Healthcare</span>
+        </div>
+        <div class="proj-title" data-en="Healthcare AI Diagnostic System" data-de="KI-Diagnosesystem im Gesundheitswesen">Healthcare AI Diagnostic System</div>
+        <div class="proj-desc" data-en="Developed an AI-based diagnostic tool for early detection of medical conditions using machine learning algorithms. Applied classification models and neural network architectures to medical data, focusing on accuracy and interpretability for clinical use." data-de="Entwicklung eines KI-basierten Diagnosewerkzeugs zur Früherkennung von Erkrankungen mithilfe maschineller Lernalgorithmen. Anwendung von Klassifikationsmodellen und neuronalen Netzwerkarchitekturen auf medizinische Daten.">Developed an AI-based diagnostic tool for early detection of medical conditions using machine learning algorithms. Applied classification models and neural network architectures to medical data, focusing on accuracy and interpretability.</div>
+        <div class="proj-footer"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Neural Networks</span><span class="tag">Data Analysis</span></div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-icon">🎛️</div>
+          <span class="proj-type" data-en="Research / Control Systems" data-de="Forschung / Regelungstechnik">Research / Control Systems</span>
+        </div>
+        <div class="proj-title" data-en="PID Controller Optimization with Neural-Fuzzy Algorithm" data-de="PID-Regler-Optimierung mit Neuro-Fuzzy-Algorithmus">PID Controller Optimization with Neural-Fuzzy Algorithm</div>
+        <div class="proj-desc" data-en="Research project resulting in a published paper at the 4th International Conference on Science & Engineering (Rome, 2016). Designed an ANFIS-based optimization approach for PID controllers applied to hydraulic servo cylinder systems, combining fuzzy logic and neural network learning." data-de="Forschungsprojekt mit Veröffentlichung auf der 4. Internationalen Konferenz für Wissenschaft und Ingenieurwesen (Rom, 2016). Entwurf eines ANFIS-basierten Optimierungsansatzes für PID-Regler bei hydraulischen Servozylindern.">Research project resulting in a published paper (Rome, 2016). ANFIS-based optimization for PID controllers applied to hydraulic servo cylinder systems — combining fuzzy logic and neural network learning for precision control.</div>
+        <div class="proj-footer"><span class="tag">ANFIS</span><span class="tag">MATLAB</span><span class="tag">Fuzzy Logic</span><span class="tag">PID Control</span><span class="tag">Published</span></div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-icon">🔌</div>
+          <span class="proj-type" data-en="IoT / Embedded" data-de="IoT / Embedded">IoT / Embedded</span>
+        </div>
+        <div class="proj-title" data-en="Industrial IoT Training Platform" data-de="Industrielle IoT-Trainingsplattform">Industrial IoT Training Platform</div>
+        <div class="proj-desc" data-en="Designed and deployed a hands-on Industrial IoT training environment using the Siemens IoT2050 gateway. Covered MQTT protocols, Node-RED flows, sensor data collection, and cloud connectivity — used to train apprentices at Siemens Professional Education." data-de="Entwicklung und Aufbau einer praktischen industriellen IoT-Trainingsumgebung mit dem Siemens IoT2050. Umfasste MQTT-Protokolle, Node-RED-Flows, Sensordatenerfassung und Cloud-Anbindung — eingesetzt zur Ausbildung bei Siemens Professional Education.">Designed and deployed an Industrial IoT training environment using the Siemens IoT2050 gateway. Covered MQTT, Node-RED flows, sensor data collection, and cloud connectivity for apprentice training.</div>
+        <div class="proj-footer"><span class="tag">IoT2050</span><span class="tag">Node-RED</span><span class="tag">MQTT</span><span class="tag">Linux</span><span class="tag">Siemens</span></div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-icon">🎓</div>
+          <span class="proj-type" data-en="University / Web" data-de="Universität / Web">University / Web</span>
+        </div>
+        <div class="proj-title" data-en="TU Berlin — Digital Information Management System" data-de="TU Berlin — Digitales Informationsmanagementsystem">TU Berlin — Digital Information Management System</div>
+        <div class="proj-desc" data-en="Development of web-based systems for digital transformation at TU Berlin, including tools for capturing and evaluating professor performance data, supporting HR processes (LinF and W-Besoldung), and streamlining research administration workflows." data-de="Entwicklung webbasierter Systeme zur digitalen Transformation an der TU Berlin, einschließlich Werkzeuge zur Erfassung und Auswertung von Professorenleistungen und Unterstützung von Personalprozessen.">Development of web-based systems for digital transformation at TU Berlin, including tools for performance data management, HR processes (LinF and W-Besoldung), and research administration workflows.</div>
+        <div class="proj-footer"><span class="tag">PHP</span><span class="tag">MS SQL Server</span><span class="tag">GitLab</span><span class="tag">HTML</span></div>
+      </div>
+
+      <div class="proj-card" style="border-style:dashed">
+        <div class="proj-header">
+          <div class="proj-icon">🚀</div>
+          <span class="proj-type" data-en="In development" data-de="In Entwicklung">In development</span>
+        </div>
+        <div class="proj-title" data-en="Cognitive Industrial AI Platform (Startup)" data-de="Kognitive industrielle KI-Plattform (Startup)">Cognitive Industrial AI Platform (Startup)</div>
+        <div class="proj-desc" data-en="A future AI software platform combining Artificial Intelligence, Digital Twins, Robotics, and IoT for intelligent manufacturing. Focus areas: predictive maintenance, decision support, and autonomous industrial environments." data-de="Eine zukünftige KI-Softwareplattform, die künstliche Intelligenz, digitale Zwillinge, Robotik und IoT für intelligente Fertigung kombiniert. Schwerpunkte: vorausschauende Wartung, Entscheidungsunterstützung und autonome Industrieumgebungen.">A future AI software platform combining AI, Digital Twins, Robotics, and IoT for intelligent manufacturing. Focus: predictive maintenance, decision support, and autonomous industrial environments.</div>
+        <div class="proj-footer"><span class="tag">AI</span><span class="tag">Digital Twin</span><span class="tag">Robotics</span><span class="tag">Industry 4.0</span><span class="tag">Startup</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider" style="position:relative;z-index:1">
 
 <!-- RESEARCH -->
 <section id="research">
-  <div class="section-wrap">
-    <p class="sec-label">// research</p>
-    <h2 class="sec-title">Publications &amp; conferences</h2>
-    <p class="sec-desc">Research at the intersection of AI, control systems, and intelligent industrial automation.</p>
-    <div class="research-grid">
-      <div class="research-card">
-        <div class="research-year">2025 · INVITED</div>
-        <div class="research-title">1st International Workshop on Neuro-Symbolic Software Engineering</div>
-        <div class="research-venue">Ottawa, Canada</div>
-        <div class="research-desc">Invited to present research on the integration of Fuzzy Logic, Neural Networks, and symbolic control for adaptive IoT systems — connecting neuro-symbolic approaches to industrial AI challenges.</div>
+  <div class="wrap">
+    <p class="sec-eyebrow">// research</p>
+    <h2 class="sec-title" data-en="Publications & conferences" data-de="Publikationen & Konferenzen">Publications & conferences</h2>
+    <p class="sec-sub" data-en="Research at the intersection of AI, intelligent control, and industrial automation." data-de="Forschung an der Schnittstelle von KI, intelligenter Regelung und industrieller Automatisierung.">Research at the intersection of AI, intelligent control, and industrial automation.</p>
+    <div class="research-list">
+
+      <div class="res-card">
+        <div>
+          <div class="res-year">2025</div>
+          <div class="res-badge inv" data-en="INVITED" data-de="EINGELADEN">INVITED</div>
+        </div>
+        <div>
+          <div class="res-title" data-en="1st International Workshop on Neuro-Symbolic Software Engineering" data-de="1. Internationaler Workshop zu Neuro-Symbolischem Software Engineering">1st International Workshop on Neuro-Symbolic Software Engineering</div>
+          <div class="res-venue">Ottawa, Canada · 2025</div>
+          <div class="res-desc" data-en="Invited to present research on the integration of Fuzzy Logic, Neural Networks, and symbolic control for adaptive IoT systems — connecting neuro-symbolic approaches to real-world industrial AI challenges." data-de="Eingeladen zur Präsentation von Forschungsarbeiten über die Integration von Fuzzy-Logik, neuronalen Netzwerken und symbolischer Steuerung für adaptive IoT-Systeme.">Invited to present research on the integration of Fuzzy Logic, Neural Networks, and symbolic control for adaptive IoT systems — connecting neuro-symbolic approaches to real-world industrial AI challenges.</div>
+        </div>
       </div>
-      <div class="research-card">
-        <div class="research-year">2025 · INVITED</div>
-        <div class="research-title">16th AUTOSAR Open Conference</div>
-        <div class="research-venue">Bruges, Belgium</div>
-        <div class="research-desc">Invited presentation on the interface of AUTOSAR to other software technologies, covering AI Co-Pilot systems and the integration of IoT and AI in vehicle technology.</div>
+
+      <div class="res-card">
+        <div>
+          <div class="res-year">2025</div>
+          <div class="res-badge inv" data-en="INVITED" data-de="EINGELADEN">INVITED</div>
+        </div>
+        <div>
+          <div class="res-title" data-en="16th AUTOSAR Open Conference" data-de="16. AUTOSAR Open Conference">16th AUTOSAR Open Conference</div>
+          <div class="res-venue">Bruges, Belgium · May 2025</div>
+          <div class="res-desc" data-en="Invited presentation on the interface of AUTOSAR to other software technologies, including AI Co-Pilot systems and the integration of IoT and AI in modern vehicle technology." data-de="Eingeladener Vortrag über die Schnittstelle von AUTOSAR zu anderen Software-Technologien, einschließlich KI-Co-Pilot-Systemen und der Integration von IoT und KI in moderne Fahrzeugtechnologie.">Invited presentation on the interface of AUTOSAR to other software technologies, including AI Co-Pilot systems and the integration of IoT and AI in modern vehicle technology.</div>
+        </div>
       </div>
-      <div class="research-card">
-        <div class="research-year">2016 · PUBLISHED</div>
-        <div class="research-title">Optimal Design of PID Controller with Neural-Fuzzy Algorithm for Hydraulic Servo Cylinder</div>
-        <div class="research-venue">4th International Conference on Science &amp; Engineering, Rome, Italy</div>
-        <div class="research-desc">Research on ANFIS-based optimization of PID controllers for hydraulic servo systems — combining fuzzy logic and neural network approaches for precise industrial control.</div>
+
+      <div class="res-card">
+        <div>
+          <div class="res-year">2016</div>
+          <div class="res-badge pub" data-en="PUBLISHED" data-de="VERÖFFENTLICHT">PUBLISHED</div>
+        </div>
+        <div>
+          <div class="res-title" data-en="Optimal Design of PID Controller with Neural-Fuzzy Algorithm for Hydraulic Servo Cylinder" data-de="Optimale Auslegung eines PID-Reglers mit Neuro-Fuzzy-Algorithmus für hydraulische Servozylinder">Optimal Design of PID Controller with Neural-Fuzzy Algorithm for Hydraulic Servo Cylinder</div>
+          <div class="res-venue" data-en="4th International Conference on Science & Engineering · Rome, Italy · July 2016" data-de="4. Internationale Konferenz für Wissenschaft und Ingenieurwesen · Rom, Italien · Juli 2016">4th International Conference on Science & Engineering · Rome, Italy · July 2016</div>
+          <div class="res-desc" data-en="Peer-reviewed publication on ANFIS-based optimization of PID controllers applied to hydraulic servo cylinder systems. Combined fuzzy logic and neural network learning for precise, adaptive industrial control." data-de="Begutachtete Veröffentlichung zur ANFIS-basierten Optimierung von PID-Reglern für hydraulische Servozylinder. Kombination von Fuzzy-Logik und neuronalem Netzwerklernen für präzise, adaptive Industriesteuerung.">Peer-reviewed publication on ANFIS-based optimization of PID controllers for hydraulic servo cylinder systems. Combined fuzzy logic and neural network learning for precise, adaptive industrial control.</div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
+
+<hr class="divider" style="position:relative;z-index:1">
 
 <!-- VISION -->
 <section id="vision">
-  <div class="section-wrap">
-    <p class="sec-label">// startup vision</p>
-    <h2 class="sec-title">Deep-Tech founder ambition</h2>
-    <p class="sec-desc">Building toward a future AI startup focused on cognitive industrial intelligence.</p>
+  <div class="wrap">
+    <p class="sec-eyebrow">// startup vision</p>
+    <h2 class="sec-title" data-en="Deep-Tech founder ambition" data-de="Deep-Tech-Gründerambitionen">Deep-Tech founder ambition</h2>
+    <p class="sec-sub" data-en="Building toward a next-generation AI startup for cognitive industrial systems." data-de="Aufbau eines KI-Startups der nächsten Generation für kognitive Industriesysteme.">Building toward a next-generation AI startup for cognitive industrial systems.</p>
     <div class="vision-box">
-      <div class="vision-headline">Cognitive Industrial <span>AI Systems</span></div>
-      <div class="vision-text">An intelligent software platform combining Artificial Intelligence, Robotics, IoT, Digital Twins, and Industrial Automation to support engineers in predictive maintenance, decision support, intelligent manufacturing, and autonomous industrial environments. Currently exploring European Deep-Tech Accelerators including xG Incubator, KI PredWiT, and the JARVIS Evaluator program.</div>
-      <div class="vision-pillars">
-        <div class="pillar">
-          <div class="pillar-icon">🔮</div>
-          <div class="pillar-label">Predictive Maintenance</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">🤖</div>
-          <div class="pillar-label">Autonomous Systems</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">🏭</div>
-          <div class="pillar-label">Smart Manufacturing</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">🔗</div>
-          <div class="pillar-label">Digital Twin</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-icon">⚡</div>
-          <div class="pillar-label">Edge AI</div>
-        </div>
+      <div class="vision-glow"></div>
+      <div class="vision-headline" data-en="Cognitive Industrial <span>AI Systems</span>" data-de="Kognitive Industrielle <span>KI-Systeme</span>">Cognitive Industrial <span>AI Systems</span></div>
+      <div class="vision-text" data-en="An intelligent software platform combining Artificial Intelligence, Robotics, IoT, Digital Twins, and Industrial Automation to support engineers in predictive maintenance, decision support, intelligent manufacturing, and autonomous industrial environments. Currently applying to European Deep-Tech Accelerators: xG Incubator, KI PredWiT, and JARVIS Evaluator." data-de="Eine intelligente Softwareplattform, die KI, Robotik, IoT, digitale Zwillinge und Industrieautomatisierung kombiniert, um Ingenieure bei vorausschauender Wartung, Entscheidungsunterstützung und autonomen Industrieumgebungen zu unterstützen. Aktuell in Bewerbung bei europäischen Deep-Tech-Acceleratoren: xG Incubator, KI PredWiT und JARVIS Evaluator.">An intelligent software platform combining Artificial Intelligence, Robotics, IoT, Digital Twins, and Industrial Automation to support engineers in predictive maintenance, decision support, intelligent manufacturing, and autonomous industrial environments. Currently applying to European Deep-Tech Accelerators: xG Incubator, KI PredWiT, and JARVIS Evaluator.</div>
+      <div class="pillars">
+        <div class="pillar"><div class="pillar-icon">🔮</div><div class="pillar-label" data-en="Predictive Maintenance" data-de="Voraussch. Wartung">Predictive Maintenance</div></div>
+        <div class="pillar"><div class="pillar-icon">🤖</div><div class="pillar-label" data-en="Autonomous Systems" data-de="Autonome Systeme">Autonomous Systems</div></div>
+        <div class="pillar"><div class="pillar-icon">🏭</div><div class="pillar-label" data-en="Smart Manufacturing" data-de="Intelligente Fertigung">Smart Manufacturing</div></div>
+        <div class="pillar"><div class="pillar-icon">🔗</div><div class="pillar-label" data-en="Digital Twin" data-de="Digitaler Zwilling">Digital Twin</div></div>
+        <div class="pillar"><div class="pillar-icon">⚡</div><div class="pillar-label" data-en="Edge AI" data-de="Edge KI">Edge AI</div></div>
       </div>
     </div>
   </div>
 </section>
+
+<hr class="divider" style="position:relative;z-index:1">
 
 <!-- EDUCATION -->
 <section id="education">
-  <div class="section-wrap">
-    <p class="sec-label">// education</p>
-    <h2 class="sec-title">Academic background</h2>
+  <div class="wrap">
+    <p class="sec-eyebrow">// education</p>
+    <h2 class="sec-title" data-en="Academic background" data-de="Akademischer Hintergrund">Academic background</h2>
     <div class="edu-grid">
       <div class="edu-card">
-        <div class="edu-degree">MSc · Informatics (incomplete)</div>
-        <div class="edu-title">Machine Learning &amp; IoT</div>
-        <div class="edu-institution">Technische Universität Berlin, Germany</div>
-        <div class="edu-meta">2017 – 2019 · Focus: ML, Deep Learning, IIoT</div>
+        <div class="edu-degree" data-en="MSc · Informatics (further studies)" data-de="MSc · Informatik (Weiterbildung)">MSc · Informatics (further studies)</div>
+        <div class="edu-title" data-en="Machine Learning & IoT" data-de="Maschinelles Lernen & IoT">Machine Learning & IoT</div>
+        <div class="edu-inst">Technische Universität Berlin</div>
+        <div class="edu-meta">2017 – 2019 · Berlin, DE</div>
       </div>
       <div class="edu-card">
-        <div class="edu-degree">MSc · Mechatronics Engineering</div>
-        <div class="edu-title">Advanced Robotics &amp; Industrial AI</div>
-        <div class="edu-institution">Azad University (IAU), Sanandaj, Iran</div>
-        <div class="edu-meta">2010 – 2012 · Grade: 1.6 · Recognised in Germany</div>
+        <div class="edu-degree" data-en="MSc · Mechatronics Engineering" data-de="MSc · Mechatronik-Ingenieurwesen">MSc · Mechatronics Engineering</div>
+        <div class="edu-title" data-en="Robotics & Industrial AI" data-de="Robotik & Industrielle KI">Robotics & Industrial AI</div>
+        <div class="edu-inst">Azad University (IAU), Iran</div>
+        <div class="edu-meta" data-en="2010 – 2012 · Grade 1.6 · Recognised in DE" data-de="2010 – 2012 · Note 1,6 · Anerkannt in DE">2010 – 2012 · Grade 1.6 · Recognised in DE</div>
       </div>
       <div class="edu-card">
-        <div class="edu-degree">BSc · Software Engineering</div>
-        <div class="edu-title">Computer Science</div>
-        <div class="edu-institution">University of Urmia, Iran</div>
-        <div class="edu-meta">2006 – 2010 · Recognised in Germany</div>
+        <div class="edu-degree" data-en="BSc · Software Engineering" data-de="BSc · Softwaretechnik">BSc · Software Engineering</div>
+        <div class="edu-title" data-en="Computer Science" data-de="Informatik">Computer Science</div>
+        <div class="edu-inst">University of Urmia, Iran</div>
+        <div class="edu-meta" data-en="2006 – 2010 · Recognised in DE" data-de="2006 – 2010 · Anerkannt in DE">2006 – 2010 · Recognised in DE</div>
       </div>
       <div class="edu-card">
-        <div class="edu-degree">Certifications</div>
+        <div class="edu-degree" data-en="Certifications" data-de="Zertifikate">Certifications</div>
         <div class="edu-title">AEVO · EFK · Siemens Charger</div>
-        <div class="edu-institution">IHK Berlin · Siemens AG</div>
-        <div class="edu-meta">2022–2024 · Vocational trainer certified</div>
+        <div class="edu-inst">IHK Berlin · Siemens AG Leipzig</div>
+        <div class="edu-meta">2022 – 2024</div>
       </div>
     </div>
   </div>
 </section>
 
+<hr class="divider" style="position:relative;z-index:1">
+
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-wrap">
-    <p class="sec-label">// contact</p>
-    <h2 class="sec-title">Let's connect</h2>
-    <p class="sec-desc">Open to research collaborations, PhD opportunities, European projects, and startup conversations.</p>
+  <div class="wrap">
+    <p class="sec-eyebrow">// contact</p>
+    <h2 class="sec-title" data-en="Let's connect" data-de="Lass uns verbinden">Let's connect</h2>
+    <p class="sec-sub" data-en="Open to research collaborations, PhD opportunities, accelerators, and AI industry partnerships." data-de="Offen für Forschungskooperationen, Doktorandenstellen, Acceleratoren und industrielle KI-Partnerschaften.">Open to research collaborations, PhD opportunities, accelerators, and AI industry partnerships.</p>
     <div class="contact-grid">
-      <div class="contact-info">
-        <p>Whether you're a researcher, accelerator, or industry partner — I'm always open to meaningful conversations about AI, robotics, and the future of intelligent manufacturing.</p>
+      <div>
+        <p style="font-size:.9rem;color:var(--text2);line-height:1.85;margin-bottom:1.5rem" data-en="Whether you are a researcher, accelerator, or industry partner — reach out and let's explore what's possible together." data-de="Ob Forscher, Accelerator oder Industriepartner — melden Sie sich und lassen Sie uns gemeinsam erkunden, was möglich ist.">Whether you are a researcher, accelerator, or industry partner — reach out and let's explore what's possible together.</div>
         <div class="contact-items">
-          <a class="contact-item" href="mailto:heidemann.shahrouz@gmail.com">
-            <div class="contact-item-icon">✉️</div>
-            heidemann.shahrouz@gmail.com
-          </a>
-          <a class="contact-item" href="tel:+4917632607745">
-            <div class="contact-item-icon">📱</div>
-            +49 176 32607745
-          </a>
-          <a class="contact-item" href="https://www.linkedin.com/in/shahrouz-heidemann" target="_blank">
-            <div class="contact-item-icon">💼</div>
-            linkedin.com/in/shahrouz-heidemann
-          </a>
-          <a class="contact-item" href="https://git.tu-berlin.de/heidemann.shahrouz" target="_blank">
-            <div class="contact-item-icon">⌨️</div>
-            git.tu-berlin.de/heidemann.shahrouz
-          </a>
-          <div class="contact-item">
-            <div class="contact-item-icon">📍</div>
-            Potsdam, Germany
-          </div>
+          <a class="contact-row" href="mailto:heidemann.shahrouz@gmail.com"><div class="contact-icon">✉️</div>heidemann.shahrouz@gmail.com</a>
+          <a class="contact-row" href="tel:+4917632607745"><div class="contact-icon">📱</div>+49 176 32607745</a>
+          <a class="contact-row" href="https://www.linkedin.com/in/shahrouz-heidemann" target="_blank" rel="noopener"><div class="contact-icon">💼</div>linkedin.com/in/shahrouz-heidemann</a>
+          <a class="contact-row" href="https://git.tu-berlin.de/heidemann.shahrouz" target="_blank" rel="noopener"><div class="contact-icon">⌨️</div>git.tu-berlin.de/heidemann.shahrouz</a>
+          <div class="contact-row"><div class="contact-icon">📍</div><span data-en="Potsdam, Germany" data-de="Potsdam, Deutschland">Potsdam, Germany</span></div>
         </div>
       </div>
-      <div class="contact-form-info">
-        <h3>Currently open to</h3>
-        <p>Looking for collaborations, funded research positions, and deep-tech accelerator partnerships in Germany and Europe.</p>
-        <div class="open-to">
-          <div class="open-item"><span class="open-dot"></span>PhD opportunities in AI / Robotics</div>
-          <div class="open-item"><span class="open-dot"></span>Horizon Europe research projects</div>
-          <div class="open-item"><span class="open-dot"></span>Deep-Tech accelerator programs</div>
-          <div class="open-item"><span class="open-dot"></span>Industrial AI consulting</div>
-          <div class="open-item"><span class="open-dot"></span>Co-founder / research partner</div>
-          <div class="open-item"><span class="open-dot"></span>Conference &amp; workshop invitations</div>
+      <div class="open-box">
+        <h3 data-en="Currently open to" data-de="Aktuell offen für">Currently open to</h3>
+        <p data-en="Seeking collaborations in funded research, European projects, and deep-tech startup ecosystems." data-de="Suche Kooperationen in geförderter Forschung, europäischen Projekten und Deep-Tech-Startup-Ökosystemen.">Seeking collaborations in funded research, European projects, and deep-tech startup ecosystems.</p>
+        <div class="open-list">
+          <div class="open-item"><span class="open-dot"></span><span data-en="PhD in AI / Robotics" data-de="Doktorat in KI / Robotik">PhD in AI / Robotics</span></div>
+          <div class="open-item"><span class="open-dot"></span><span data-en="Horizon Europe projects" data-de="Horizon-Europe-Projekte">Horizon Europe projects</span></div>
+          <div class="open-item"><span class="open-dot"></span><span data-en="Deep-Tech accelerator programs" data-de="Deep-Tech-Accelerator-Programme">Deep-Tech accelerator programs</span></div>
+          <div class="open-item"><span class="open-dot"></span><span data-en="Industrial AI consulting" data-de="Industrielle KI-Beratung">Industrial AI consulting</span></div>
+          <div class="open-item"><span class="open-dot"></span><span data-en="Co-founder / research partner" data-de="Mitgründer / Forschungspartner">Co-founder / research partner</span></div>
+          <div class="open-item"><span class="open-dot"></span><span data-en="Conference & workshop invitations" data-de="Konferenz- & Workshop-Einladungen">Conference & workshop invitations</span></div>
         </div>
       </div>
     </div>
@@ -971,75 +624,69 @@ footer {
 </section>
 
 <footer>
-  <span style="font-family:var(--mono);color:var(--text3)">© 2025 Shahrouz Heidemann · Potsdam, Germany · Built with precision</span>
+  <span style="font-family:'JetBrains Mono',monospace;color:var(--text3)">© 2025 Shahrouz Heidemann · Potsdam, Germany</span>
 </footer>
 
 <script>
-// Animated particle network canvas
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-let W, H, particles;
-
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-
-function initParticles() {
-  particles = Array.from({length: 55}, () => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    vx: (Math.random() - 0.5) * 0.3,
-    vy: (Math.random() - 0.5) * 0.3,
-    r: Math.random() * 1.5 + 0.5
-  }));
-}
-
-function draw() {
-  ctx.clearRect(0, 0, W, H);
-  // connections
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < 160) {
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(59,158,255,${0.15 * (1 - dist/160)})`;
-        ctx.lineWidth = 0.5;
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.stroke();
-      }
+// ── Canvas particle network ──
+const cv = document.getElementById('canvas');
+const ctx = cv.getContext('2d');
+let W, H, pts;
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+function init(){pts=Array.from({length:50},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.4+.4}))}
+function frame(){
+  ctx.clearRect(0,0,W,H);
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  const lineColor=isDark?'rgba(59,158,255,':'rgba(29,111,214,';
+  const dotColor=isDark?'rgba(99,179,237,.5)':'rgba(37,99,235,.35)';
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<150){ctx.beginPath();ctx.strokeStyle=lineColor+(0.13*(1-d/150))+')';ctx.lineWidth=.5;ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke()}
     }
+    ctx.beginPath();ctx.arc(pts[i].x,pts[i].y,pts[i].r,0,Math.PI*2);ctx.fillStyle=dotColor;ctx.fill();
+    pts[i].x+=pts[i].vx;pts[i].y+=pts[i].vy;
+    if(pts[i].x<0||pts[i].x>W)pts[i].vx*=-1;
+    if(pts[i].y<0||pts[i].y>H)pts[i].vy*=-1;
   }
-  // dots
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(99,179,237,0.5)';
-    ctx.fill();
-    p.x += p.vx;
-    p.y += p.vy;
-    if (p.x < 0 || p.x > W) p.vx *= -1;
-    if (p.y < 0 || p.y > H) p.vy *= -1;
-  });
-  requestAnimationFrame(draw);
+  requestAnimationFrame(frame);
 }
+resize();init();frame();
+window.addEventListener('resize',()=>{resize();init()});
 
-resize();
-initParticles();
-draw();
-window.addEventListener('resize', () => { resize(); initParticles(); });
+// ── Theme toggle ──
+function toggleTheme(){
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
+  document.querySelector('.theme-btn').textContent=isDark?'🌙':'☀️';
+  localStorage.setItem('theme',isDark?'light':'dark');
+}
+const saved=localStorage.getItem('theme');
+if(saved){document.documentElement.setAttribute('data-theme',saved);document.querySelector('.theme-btn').textContent=saved==='light'?'🌙':'☀️'}
 
-// Smooth scroll offset for fixed nav
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      window.scrollTo({ top: target.offsetTop - 72, behavior: 'smooth' });
-    }
+// ── Language toggle ──
+let lang='en';
+function setLang(l){
+  lang=l;
+  document.getElementById('btn-en').classList.toggle('active',l==='en');
+  document.getElementById('btn-de').classList.toggle('active',l==='de');
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    const txt=el.getAttribute('data-'+l);
+    if(txt)el.innerHTML=txt;
+  });
+  localStorage.setItem('lang',l);
+}
+const savedLang=localStorage.getItem('lang');
+if(savedLang)setLang(savedLang);
+
+// ── Mobile menu ──
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open')}
+
+// ── Smooth scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();window.scrollTo({top:t.offsetTop-66,behavior:'smooth'})}
   });
 });
 </script>
